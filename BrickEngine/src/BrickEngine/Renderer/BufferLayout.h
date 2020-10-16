@@ -55,9 +55,9 @@ namespace BrickEngine {
 		bool Normalized;
 
 		BufferElement()
-			: Name(""), Type(ShaderDataType::Unknown), Size(0), Offset(0), Normalized(false) {}
+			: Name(""), Type(ShaderDataType::Unknown), Size(0), Offset(0), Normalized(false) { CalculateSize(); }
 		BufferElement(ShaderDataType type, const std::string& name, bool normalized = false)
-			: Name(name), Type(type), Size(0), Offset(0), Normalized(normalized) {}
+			: Name(name), Type(type), Size(0), Offset(0), Normalized(normalized) { CalculateSize(); }
 
 		uint32_t GetElementCount() const;
 	private:
