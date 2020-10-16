@@ -1,8 +1,6 @@
 #pragma once
 
-#include <BrickEngine.h>
-
-using namespace BrickEngine;
+#include "pch.h"
 
 struct Vertex
 {

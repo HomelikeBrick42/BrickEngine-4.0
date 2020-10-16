@@ -56,7 +56,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>BRICKENGINE_PLATFORM_WINDOWS;BRICKENGINE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\BrickEngine\vendor\spdlog\include;..\BrickEngine\src;..\BrickEngine\vendor;..\BrickEngine\vendor\glm;..\BrickEngine\vendor\Glad\include;..\BrickEngine\vendor\imgui;..\BrickEngine\vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -74,7 +75,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>BRICKENGINE_PLATFORM_WINDOWS;BRICKENGINE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\BrickEngine\vendor\spdlog\include;..\BrickEngine\src;..\BrickEngine\vendor;..\BrickEngine\vendor\glm;..\BrickEngine\vendor\Glad\include;..\BrickEngine\vendor\imgui;..\BrickEngine\vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -96,9 +98,13 @@
   <ItemGroup>
     <ClInclude Include="src\CameraController.h" />
     <ClInclude Include="src\Vertex.h" />
+    <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BrickEngine\BrickEngine.vcxproj">

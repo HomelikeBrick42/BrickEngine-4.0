@@ -1,8 +1,6 @@
 #pragma once
 
-#include <BrickEngine.h>
-
-using namespace BrickEngine;
+#include "pch.h"
 
 class CameraController : public EntityScript
 {
@@ -35,6 +33,7 @@ public:
 	virtual void OnUpdate() override
 	{
 		float dt = Time::GetDelta();
+		float speed = Input::GetKey(KeyCode::LeftShift) ? m_MoveSpeed * 5.0f : m_MoveSpeed;
 
 		if (Input::GetKeyDown(KeyCode::Escape))
 		{
@@ -51,17 +50,17 @@ public:
 		}
 
 		if (Input::GetKey(KeyCode::W))
-			m_Transform->Position += m_Front * m_MoveSpeed * dt;
+			m_Transform->Position += m_Front * speed * dt;
 		if (Input::GetKey(KeyCode::S))
-			m_Transform->Position -= m_Front * m_MoveSpeed * dt;
+			m_Transform->Position -= m_Front * speed * dt;
 		if (Input::GetKey(KeyCode::A))
-			m_Transform->Position -= m_Right * m_MoveSpeed * dt;
+			m_Transform->Position -= m_Right * speed * dt;
 		if (Input::GetKey(KeyCode::D))
-			m_Transform->Position += m_Right * m_MoveSpeed * dt;
+			m_Transform->Position += m_Right * speed * dt;
 		if (Input::GetKey(KeyCode::E))
-			m_Transform->Position += m_Up * m_MoveSpeed * dt;
+			m_Transform->Position += m_Up * speed * dt;
 		if (Input::GetKey(KeyCode::Q))
-			m_Transform->Position -= m_Up * m_MoveSpeed * dt;
+			m_Transform->Position -= m_Up * speed * dt;
 
 		if (m_Pitch > 89.0f)
 			m_Pitch = 89.0f;

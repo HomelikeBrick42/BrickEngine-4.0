@@ -1,9 +1,7 @@
-#include <BrickEngine.h>
+#include "pch.h"
 
 #include "Vertex.h"
 #include "CameraController.h"
-
-using namespace BrickEngine;
 
 class GameApplication : public Application
 {
@@ -15,9 +13,9 @@ public:
 		m_VertexArray->Bind();
 
 		Vertex positions[] = {
-			Vertex({  0.0f,  0.5f, 0.0f }, { 0.2f, 0.8f, 0.3f, 1.0f }),
-			Vertex({ -0.5f, -0.5f, 0.0f }, { 0.8f, 0.2f, 0.3f, 1.0f }),
-			Vertex({  0.5f, -0.5f, 0.0f }, { 0.2f, 0.3f, 0.8f, 1.0f }),
+			Vertex({ -0.5f, -0.5f, 0.0f }, { 0.2f, 0.8f, 0.3f, 1.0f }),
+			Vertex({ -0.5f,  0.5f, 0.0f }, { 0.8f, 0.8f, 0.3f, 1.0f }),
+			Vertex({  0.5f,  0.5f, 0.0f }, { 0.8f, 0.2f, 0.3f, 1.0f }),
 			Vertex({  0.5f, -0.5f, 0.0f }, { 0.2f, 0.3f, 0.8f, 1.0f })
 		};
 		Ref<VertexBuffer> vertexBuffer = VertexBuffer::Create(positions, sizeof(positions));
