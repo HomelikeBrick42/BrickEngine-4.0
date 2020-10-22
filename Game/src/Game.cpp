@@ -3,6 +3,9 @@
 #include "Vertex.h"
 #include "CameraController.h"
 
+#include "SimplexNoise.h"
+#include "MapGenerator.h"
+
 class GameApplication : public Application
 {
 public:
@@ -56,7 +59,7 @@ uniform mat4 u_Model;
 void main()
 {
 	gl_Position = u_View * u_Model * a_Position;
-	v_Normal = normalize((u_Model * vec4(a_Normal, 0.0f)).xyz);
+	v_Normal = normalize(a_Normal);
 	v_TexCoord = a_TexCoord;
 	v_Color = a_Color;
 }
@@ -73,14 +76,21 @@ out vec4 o_Color;
 void main()
 {
 	vec3 normal = normalize(v_Normal);
-	o_Color = v_Color;
+	o_Color = vec4(v_Color.xyz * dot(normal, normalize(vec3(1.0, 1.0, 1.0))), v_Color.w);
 }
 )";
 		m_VertexColorShader = Shader::Create(vertexColorShaderVertexSource, vertexColorShaderFragmentSource);
 
+		m_Noise = OpenSimplexNoise(50);
+
 		m_Entity = m_Scene.CreateEntity();
 		m_Entity.AddComponent<Transform>();
 		m_Entity.AddComponent<MeshRenderer>(m_VertexArray, m_VertexColorShader);
+
+		Ref<VertexArray> va = MapGenerator::GenerateMap(1000, 1000, m_Noise);
+		Entity entity = m_Scene.CreateEntity();
+		entity.AddComponent<Transform>().Position.y = -2.0f;
+		entity.AddComponent<MeshRenderer>(va, m_VertexColorShader);
 
 		m_Camera = m_Scene.CreateEntity();
 		m_Camera.AddComponent<Transform>().Position.z = -1.5f;
@@ -117,6 +127,8 @@ private:
 	Entity m_Camera;
 	Ref<Shader> m_VertexColorShader;
 	Ref<VertexArray> m_VertexArray;
+	Ref<VertexArray> m_TerrainVertexArray;
+	OpenSimplexNoise m_Noise;
 };
 
 int main()
